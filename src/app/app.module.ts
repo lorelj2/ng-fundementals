@@ -1,18 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { EventsAppComponent } from './events-app.component';
-import {EventListComponent} from './event/event-list.component';
-import {EventThumbnailComponent} from './event/event-thumbnail.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {
+  EventListComponent,
+  EventThumbnailComponent, EventService, EventDetailsComponent, CreateEventComponent, EventDetailsActivatorComponent
+} from './event/index';
 import {NavbarComponent} from './nav/navbar.component';
-import { EventService } from './event/shared/event.service';
-import { NotificationService } from './common/notification.service';
-import { EventDetailsComponent } from './event/event-details/event-details.component';
-import { CreateEventComponent }  from './event/create-event.component';
-import { appRoutes } from './routes';
-import { RouterModule } from '@angular/router';
-import { Error404Component } from './errors/Error404.component';
-import { EventDetailsActivatorComponent } from './event/event-details/event-detail-activator.component';
+import {NotificationService} from './common/notification.service';
+import {appRoutes} from './routes';
+import {RouterModule} from '@angular/router';
+import {Error404Component} from './errors/Error404.component';
+import {EventsAppComponent} from './events-app.component';
+import {EventResolver} from './event/shared/event-resolve.service';
+import {LoginComponent} from './login/login.component';
+import {FormsModule} from '@angular/forms';
+import {AuthService} from './auth/auth.service';
+import {ProfileComponent} from './profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -22,13 +25,17 @@ import { EventDetailsActivatorComponent } from './event/event-details/event-deta
     NavbarComponent,
     EventDetailsComponent,
     CreateEventComponent,
-    Error404Component
+    Error404Component,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   bootstrap: [EventsAppComponent],
-  providers: [EventService,NotificationService, EventDetailsActivatorComponent]
+  providers: [EventService, NotificationService, EventDetailsActivatorComponent, EventResolver, AuthService]
 })
-export class AppModule { }
+export class AppModule {
+}
